@@ -1,0 +1,68 @@
+.container {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fcfcfc; 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #242424;
+  text-align: center;
+  padding: 0 1rem;
+  overflow: hidden;
+}
+
+.message-box {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2.5rem 3rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(36, 36, 36, 0.1);
+
+}
+
+.message-box h1 {
+  font-size: 2.25rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  color: #242424; 
+}
+
+.timer-box {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.time-segment {
+  background: #57c016; 
+  padding: 1rem 1.2rem;
+  border-radius: 10px;
+  flex: 1;
+  box-shadow: 0 4px 10px rgba(36, 36, 36, 0.1);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 700;
+}
+
+.time-number {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 0.3rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.time-label {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #d4f88e; 
+}
+
+.release-message {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1rem;
+  color: #57c016;
+}

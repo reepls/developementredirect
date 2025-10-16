@@ -1,14 +1,17 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import './App.css'
 
 function App() {
-  // Target release date: November 3rd, current year
-  const releaseDate = new Date(new Date().getFullYear(), 10, 3, 0, 0, 0) // Month 10 = November (0-indexed)
+  // Target release date: 37 days from today
+  const releaseDate = useMemo(() => {
+    const date = new Date()
+    date.setDate(date.getDate() + 37)
+    return date
+  }, [])
 
-  const calculateTimeLeft = () => {
+  const [timeLeft, setTimeLeft] = useState(() => {
     const now = new Date()
-const difference = releaseDate.getTime() - now.getTime()
-
+    const difference = releaseDate.getTime() - now.getTime()
 
     if (difference <= 0) {
       return null
@@ -20,11 +23,25 @@ const difference = releaseDate.getTime() - now.getTime()
       minutes: Math.floor((difference / 1000 / 60) % 60),
       seconds: Math.floor((difference / 1000) % 60),
     }
-  }
-
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft())
+  })
 
   useEffect(() => {
+    const calculateTimeLeft = () => {
+      const now = new Date()
+      const difference = releaseDate.getTime() - now.getTime()
+
+      if (difference <= 0) {
+        return null
+      }
+
+      return {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      }
+    }
+
     const timer = setInterval(() => {
       const updatedTimeLeft = calculateTimeLeft()
       setTimeLeft(updatedTimeLeft)
@@ -34,7 +51,7 @@ const difference = releaseDate.getTime() - now.getTime()
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [])
+  }, [releaseDate])
 
   return (
     <div className="container">
